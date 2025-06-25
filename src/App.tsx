@@ -1,11 +1,12 @@
-import React from 'react';
-import './index.css';
-import Header from './components/Header';
-
+import React from "react";
+import "./index.css";
+import LandingPage from "./pages/landingPage";
 
 function App() {
   return (
-   < Header />
+    <>
+      <LandingPage />
+    </>
   );
 }
 
