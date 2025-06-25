@@ -1,6 +1,10 @@
 import Sidebar from "../components/Sidebar";
+import ReactModal from "react-modal";
+import { useState } from "react";
 
 function Billing() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <>
       <header className="flex justify-between pr-10 h-16 bg-white border-b border-gray-200 sticky top-0 z-20">
@@ -27,11 +31,52 @@ function Billing() {
             <button className="bg-gray-300 text-black px-4 py-2 rounded-lg mr-2">
               redeem
             </button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              onClick={() => setModalOpen(true)}
+            >
               Add credit
             </button>
           </div>
         </div>
+
+        <ReactModal
+          isOpen={modalOpen}
+          onRequestClose={() => setModalOpen(false)}
+          contentLabel="Add Credit Modal"
+          className="bg-white rounded shadow-lg"
+          overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+        >
+          <div className="border-b border-black px-6 pt-4 flex justify-between">
+            <h2 className="text-xl font-bold mb-4">Top Up Balance</h2>
+            <div onClick={() => setModalOpen(false)} className="cursor-pointer">
+              x
+            </div>
+          </div>
+          <div className="px-6 py-4 flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <label>amount(Rp)</label>
+              <input
+                className="border border-gray-300 w-[300px] rounded-lg p-2"
+                type="number"
+              />
+            </div>
+            <div className="flex flex-row gap-4 mt-4 justify-between">
+              <div className="bg-white p-2 rounded-lg border border-gray-300">
+                50.000
+              </div>
+              <div className="bg-white p-2 rounded-lg border border-gray-300">
+                100.000
+              </div>
+              <div className="bg-white p-2 rounded-lg border border-gray-300">
+                200.000
+              </div>
+            </div>
+            <div className="mt-4">
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-center w-full">top up</button>
+            </div>
+          </div>
+        </ReactModal>
 
         <div className="bg-white p-6 rounded-lg shadow-lg mt-6">
           <div className="flex gap-4 items-center">
@@ -45,8 +90,8 @@ function Billing() {
 
         <div>
           <div className="flex gap-4">
-              <h2 className="text-2xl font-bold mt-6">Transaction </h2>
-              <h2 className="text-2xl font-bold mt-6">Payment </h2>
+            <h2 className="text-2xl font-bold mt-6">Transaction </h2>
+            <h2 className="text-2xl font-bold mt-6">Payment </h2>
           </div>
           <div className="mt-5">
             <table className="min-w-full border border-gray-300">

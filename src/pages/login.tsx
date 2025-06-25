@@ -7,7 +7,7 @@ function Login() {
     <>
       <Header />
       <div className="flex justify-center items-center h-screen">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-[500px] flex flex-col gap-4">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-[500px] flex flex-col gap-4 border border-black">
           <div className="text-center pb-4">
             <h1 className="text-2xl font-bold">Welcome back</h1>
             <p className="text-sm">Sign in to your account to continue</p>
