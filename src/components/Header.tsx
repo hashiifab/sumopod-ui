@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-    <header className="bg-white flex justify-around items-center pt-6 sticky top-0">
+    <header className="bg-white flex justify-around items-center pt-6 sticky absolute top-0">
       <div className="flex gap-8 items-center">
         <h1 className="text-2xl font-bold">Sumopod</h1>
         <a className="hover:text-blue-500" href="/">

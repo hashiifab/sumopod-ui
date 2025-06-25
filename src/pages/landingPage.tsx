@@ -39,13 +39,17 @@ function LandingPage() {
         <div className="bg-white border-2 border-blue-500 w-[500px] h-[400px] rounded-lg flex flex-col justify-center items-center gap-4">
           <h2 className="text-2xl font-bold">Start Today</h2>
           <h1 className="text-4xl font-black text-blue-600"> FREE </h1>
-          <p className="text-xl font-medium text-center">
+          <p className="text-medium font-medium text-center">
             Get started with SumoPod today and experience the power of container
             management
           </p>
           <div className="flex flex-col justify-center items-center gap-4">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-sm">Get Started</button>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-sm">See App Template</button >
+            <button className="bg-blue-600 text-white min-w-[400px] px-6 py-2 rounded-sm">
+              Get Started
+            </button>
+            <button className="bg-blue-600 text-white min-w-[400px] px-6 py-2 rounded-sm">
+              See App Template
+            </button>
           </div>
         </div>
       </section>
