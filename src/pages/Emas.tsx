@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar";
 import ReactModal from "react-modal";
 import { useState } from "react";
 
-function Billing() {
+function BeliEmas() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -10,8 +10,8 @@ function Billing() {
       <div className="ml-[300px] p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Billing</h1>
-            <p>Manage your balance and view transaction history</p>
+            <h1 className="text-2xl font-bold">Beli emas</h1>
+            <p>ayo beli emass</p>
           </div>
           <div className="flex gap-4">
             <button className="bg-gray-300 text-black px-4 py-2 rounded-lg mr-2">
@@ -120,4 +120,4 @@ function Billing() {
   );
 }
 
-export default Billing;
+export default BeliEmas;

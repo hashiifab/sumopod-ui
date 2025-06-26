@@ -1,15 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
-import Home from "./pages/home";
-import Templates from "./pages/templates";
-import Login from "./pages/login";
-import Dashboard from "./pages/dashboard";
-import Billing from "./pages/billing";
-import Ai from "./pages/ai";
-import Affiliate from "./pages/affiliate";
-import Setting from "./pages/setting";
-import Support from "./pages/support";
+import Home from "./pages/Home";
+import Templates from "./pages/Templates";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Billing from "./pages/Billing";
+import Ai from "./pages/Ai";
+import Affiliate from "./pages/Affiliate";
+import Setting from "./pages/Setting";
+import Support from "./pages/Support";
+import BeliEmas from "./pages/Emas";
+
+import Services from "./pages/Service";
 
 function App() {
   return (
@@ -18,12 +21,16 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/templates" element={<Templates />} />
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/billing" element={<Billing />}></Route>
-        <Route path="/ai" element={<Ai />}></Route>
-        <Route path="/affiliate" element={<Affiliate />} />
-        <Route path="/setting" element={<Setting />} />
-        <Route path="/support" element={<Support />} />
+
+        <Route element={<Dashboard />}>
+          <Route path="/dashboard/services" element={<Services />}></Route>
+          <Route path="/dashboard/billing" element={<Billing />}></Route>
+          <Route path="/dashboard/ai" element={<Ai />}></Route>
+          <Route path="/dashboard/affiliate" element={<Affiliate />} />
+          <Route path="/dashboard/setting" element={<Setting />} />
+          <Route path="/dashboard/support" element={<Support />} />
+          <Route path="/dashboard/emas" element={<BeliEmas />} />
+        </Route>
       </Routes>
     </Router>
   );

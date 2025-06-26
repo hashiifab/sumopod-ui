@@ -23,7 +23,7 @@ function Login() {
               type="email"
             />
           </div>
-          <Link to="/dashboard">
+          <Link to="/dashboard/services">
             <button className="bg-blue-500 text-white p-2 rounded-lg w-[98%]">
               send verification code
             </button>
