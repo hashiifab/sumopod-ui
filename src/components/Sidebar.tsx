@@ -25,7 +25,7 @@ function Sidebar() {
 						<Link to="/dashboard/support">
 							<li className="mt-4">Support</li>
 						</Link>
-						<Link to="/dashboard/emas">
+						<Link to="/dashboard/beli-emas">
 							<li className="mt-4">Belii Emas</li>
 						</Link>
 					</ul>

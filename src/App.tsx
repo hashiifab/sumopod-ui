@@ -5,7 +5,7 @@ import Affiliate from "./pages/affiliate";
 import Ai from "./pages/ai";
 import Billing from "./pages/billing";
 import Dashboard from "./pages/dashboard";
-import BeliEmas from "./pages/Emas";
+import BeliEmas from "./pages/BeliEmas";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import Services from "./pages/Service";
@@ -28,7 +28,7 @@ function App() {
 					<Route path="/dashboard/affiliate" element={<Affiliate />} />
 					<Route path="/dashboard/setting" element={<Setting />} />
 					<Route path="/dashboard/support" element={<Support />} />
-					<Route path="/dashboard/emas" element={<BeliEmas />} />
+					<Route path="/dashboard/beli-emas" element={<BeliEmas />} />
 				</Route>
 			</Routes>
 		</Router>

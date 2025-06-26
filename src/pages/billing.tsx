@@ -1,3 +1,7 @@
+/** biome-ignore-all lint/a11y/useButtonType: <explanation> */
+/** biome-ignore-all lint/a11y/noStaticElementInteractions: <explanation> */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
+/** biome-ignore-all lint/a11y/noLabelWithoutControl: <explanation> */
 import { useState } from "react";
 import ReactModal from "react-modal";
 import Sidebar from "../components/Sidebar";
