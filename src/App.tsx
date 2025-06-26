@@ -1,19 +1,20 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./index.css";
 
-import Affiliate from "./pages/affiliate";
-import Ai from "./pages/ai";
-import Billing from "./pages/billing";
-import Dashboard from "./pages/dashboard";
+import Affiliate from "./pages/Affiliate";
+import Ai from "./pages/Ai";
+import Billing from "./pages/Billing";
+import Dashboard from "./pages/Dashboard";
 import BeliEmas from "./pages/BeliEmas";
 import Home from "./pages/Home";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import Services from "./pages/Service";
-import Setting from "./pages/setting";
-import Support from "./pages/support";
+import Setting from "./pages/Setting";
+import Support from "./pages/Support";
 import Templates from "./pages/Templates";
 
 function App() {
+  
 	return (
 		<Router>
 			<Routes>

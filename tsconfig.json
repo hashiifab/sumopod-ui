@@ -27,6 +27,6 @@
 		"forceConsistentCasingInFileNames": true,
 		"types": ["vitest/globals"]
 	},
-	"include": ["src", "vite.config.ts"],
+	"include": ["src", "vite.config.ts", "src/SupabaseClient.tsx"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
