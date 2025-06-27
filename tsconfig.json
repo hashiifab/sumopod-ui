@@ -9,6 +9,10 @@
 		/* Bundler mode */
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		},
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
@@ -26,6 +30,5 @@
 		"forceConsistentCasingInFileNames": true,
 		"types": ["vitest/globals"]
 	},
-	"include": ["src", "vite.config.ts", "src/SupabaseClient.tsx"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"include": ["src"]
 }
