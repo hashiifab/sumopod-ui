@@ -1,10 +1,5 @@
-/** biome-ignore-all lint/a11y/useButtonType: <explanation> */
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: <explanation> */
-/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
-/** biome-ignore-all lint/a11y/noLabelWithoutControl: <explanation> */
 import { useState } from "react";
 import ReactModal from "react-modal";
-import Sidebar from "../components/Sidebar";
 
 function Billing() {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -18,10 +13,14 @@ function Billing() {
 						<p>Manage your balance and view transaction history</p>
 					</div>
 					<div className="flex gap-4">
-						<button className="bg-gray-300 text-black px-4 py-2 rounded-lg mr-2">
+						<button
+							type="button"
+							className="bg-gray-300 text-black px-4 py-2 rounded-lg mr-2"
+						>
 							redeem
 						</button>
 						<button
+							type="button"
 							className="bg-blue-500 text-white px-4 py-2 rounded-lg"
 							onClick={() => setModalOpen(true)}
 						>
@@ -39,13 +38,18 @@ function Billing() {
 				>
 					<div className="border-b border-black px-6 pt-4 flex justify-between">
 						<h2 className="text-xl font-bold mb-4">Top Up Balance</h2>
-						<div onClick={() => setModalOpen(false)} className="cursor-pointer">
-							x
-						</div>
+						<button
+							type="button"
+							onClick={() => setModalOpen(false)}
+							className="cursor-pointer bg-transparent border-none text-xl font-bold hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-1"
+							aria-label="Close modal"
+						>
+							×
+						</button>
 					</div>
 					<div className="px-6 py-4 flex flex-col gap-4">
 						<div className="flex flex-col gap-2">
-							<label>amount(Rp)</label>
+							<label htmlFor="amount">amount(Rp)</label>
 							<input
 								className="border border-gray-300 w-[300px] rounded-lg p-2"
 								type="number"
@@ -63,7 +67,10 @@ function Billing() {
 							</div>
 						</div>
 						<div className="mt-4">
-							<button className="bg-blue-500 text-white px-4 py-2 rounded-lg text-center w-full">
+							<button
+								type="button"
+								className="bg-blue-500 text-white px-4 py-2 rounded-lg text-center w-full"
+							>
 								top up
 							</button>
 						</div>

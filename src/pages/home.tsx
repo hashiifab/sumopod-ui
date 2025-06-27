@@ -1,4 +1,3 @@
-import React from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
@@ -8,10 +7,7 @@ function Home() {
 			<Header />
 
 			{/* Hero Section */}
-			<section
-				id="hero"
-				className="flex flex-col justify-center items-center h-screen"
-			>
+			<section className="flex flex-col justify-center items-center h-screen">
 				<div className="text-center">
 					<h1 className="text-8xl font-bold">
 						<span className="text-blue-600">Deploy your App</span> <br /> in 15
@@ -19,10 +15,16 @@ function Home() {
 					</h1>
 				</div>
 				<div className="flex space-x-4 mt-8">
-					<button className="bg-blue-600 text-white px-6 py-2 rounded-lg">
+					<button
+						type="button"
+						className="bg-blue-600 text-white px-6 py-2 rounded-lg"
+					>
 						Get Started
 					</button>
-					<button className="bg-gray-200 text-black px-6 py-2 rounded-lg">
+					<button
+						type="button"
+						className="bg-gray-200 text-black px-6 py-2 rounded-lg"
+					>
 						See App tempalate
 					</button>
 				</div>
@@ -45,10 +47,16 @@ function Home() {
 						management
 					</p>
 					<div className="flex flex-col justify-center items-center gap-4">
-						<button className="bg-blue-600 text-white min-w-[400px] px-6 py-2 rounded-sm">
+						<button
+							type="button"
+							className="bg-blue-600 text-white min-w-[400px] px-6 py-2 rounded-sm"
+						>
 							Get Started
 						</button>
-						<button className="bg-blue-600 text-white min-w-[400px] px-6 py-2 rounded-sm">
+						<button
+							type="button"
+							className="bg-blue-600 text-white min-w-[400px] px-6 py-2 rounded-sm"
+						>
 							See App Template
 						</button>
 					</div>
@@ -115,10 +123,16 @@ function Home() {
 							</p>
 						</div>
 						<div className="flex flex-row gap-4">
-							<button className="bg-transparent border-2 border-white text-white px-6 py-2 rounded-lg">
+							<button
+								type="button"
+								className="bg-transparent border-2 border-white text-white px-6 py-2 rounded-lg"
+							>
 								See App Template
 							</button>
-							<button className="bg-white text-black px-7 py-3 rounded-lg">
+							<button
+								type="button"
+								className="bg-white text-black px-7 py-3 rounded-lg"
+							>
 								Get Started
 							</button>
 						</div>

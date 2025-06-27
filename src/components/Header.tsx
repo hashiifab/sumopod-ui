@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -23,12 +22,18 @@ function Header() {
 			<div>
 				<div className="flex gap-8">
 					<Link to="/login">
-						<button className="bg-gray-300 text-black p-2 rounded-md">
+						<button
+							type="button"
+							className="bg-gray-300 text-black p-2 rounded-md"
+						>
 							Login
 						</button>
 					</Link>
 					<Link to="/login">
-						<button className="bg-blue-500 text-white p-2 rounded-md">
+						<button
+							type="button"
+							className="bg-blue-500 text-white p-2 rounded-md"
+						>
 							Get Started
 						</button>
 					</Link>

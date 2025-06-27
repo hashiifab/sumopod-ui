@@ -3,9 +3,9 @@ import "./index.css";
 
 import Affiliate from "./pages/Affiliate";
 import Ai from "./pages/Ai";
+import BeliEmas from "./pages/BeliEmas";
 import Billing from "./pages/Billing";
 import Dashboard from "./pages/Dashboard";
-import BeliEmas from "./pages/BeliEmas";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Services from "./pages/Service";
@@ -14,7 +14,6 @@ import Support from "./pages/Support";
 import Templates from "./pages/Templates";
 
 function App() {
-  
 	return (
 		<Router>
 			<Routes>

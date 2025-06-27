@@ -7,10 +7,16 @@ function Services() {
 					<p>Manage your managed services</p>
 				</div>
 				<div>
-					<button className="bg-gray-300 text-black px-4 py-2 rounded-lg mr-2">
+					<button
+						type="button"
+						className="bg-gray-300 text-black px-4 py-2 rounded-lg mr-2"
+					>
 						refresh
 					</button>
-					<button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+					<button
+						type="button"
+						className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+					>
 						Add Service
 					</button>
 				</div>
@@ -46,7 +52,10 @@ function Services() {
 							</td>
 							<td className="px-4 py-2 border-b text-center">2025-01-01</td>
 							<td className="px-4 py-2 border-b text-center">
-								<button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+								<button
+									type="button"
+									className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+								>
 									Manage
 								</button>
 							</td>
