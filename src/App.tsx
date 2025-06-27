@@ -1,5 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { useEffect } from "react";
 import "./index.css";
+import { supabase } from "./supabase";
 
 import Affiliate from "./pages/Affiliate";
 import Ai from "./pages/Ai";
@@ -14,6 +16,20 @@ import Support from "./pages/Support";
 import Templates from "./pages/Templates";
 
 function App() {
+	useEffect(() => {
+		// Handle OAuth callback and clean up URL
+		const handleAuthCallback = async () => {
+			const { data } = await supabase.auth.getSession();
+
+			if (data.session && window.location.hash) {
+				// Clean up the URL by removing the hash
+				window.history.replaceState(null, '', window.location.pathname);
+			}
+		};
+
+		handleAuthCallback();
+	}, []);
+
 	return (
 		<Router>
 			<Routes>

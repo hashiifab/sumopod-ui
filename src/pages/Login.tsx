@@ -4,10 +4,14 @@ import { supabase } from "../supabase";
 
 function Login() {
 	const loginGoogle = async () => {
+		// Determine the correct redirect URL based on environment
+		const isProduction = import.meta.env.PROD || window.location.hostname === 'cloone-sumopod.netlify.app';
+		const baseUrl = isProduction ? 'https://cloone-sumopod.netlify.app' : window.location.origin;
+		
 		await supabase.auth.signInWithOAuth({
 			provider: "google",
 			options: {
-				redirectTo: `${window.location.origin}/dashboard/services`,
+				redirectTo: `${baseUrl}/dashboard/services`,
 			},
 		});
 	};
