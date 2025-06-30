@@ -1,57 +1,75 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BalanceCard from "../components/BalanceCard";
 import TopUpModal from "../components/TopUpModal";
 import TransactionTable from "../components/TransactionTable";
+import { supabase } from "../supabase";
 
 function Billing() {
 	const [modalOpen, setModalOpen] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
+	const navigate = useNavigate();
 
-	// Mock data for current balance (will be dynamic in future integration)
-	const currentBalance = "Rp 190.000";
+	useEffect(() => {
+		const checkAuth = async () => {
+			try {
+				const {
+					data: { session },
+				} = await supabase.auth.getSession();
 
-	// Mock data for transactions (will be dynamic in future integration)
-	const transactions = [
-		{
-			date: "6/24/2025",
-			description: "Credit purchase: 50000 credits",
-			type: "purchase",
-			amount: "+Rp 50.000 credits",
-		},
-		{
-			date: "6/24/2025",
-			description: "Credit purchase: 50000 credits",
-			type: "purchase",
-			amount: "+Rp 50.000 credits",
-		},
-		{
-			date: "6/24/2025",
-			description: "Credit purchase: 50000 credits",
-			type: "purchase",
-			amount: "+Rp 30.000 credits",
-		},
-	];
+				if (!session?.user) {
+					navigate("/login");
+					return;
+				}
 
-	// Mock data for payments (will be dynamic in future integration)
-	const payments = [
-		{
-			date: "6/24/2025",
-			amount: "Rp 50.000",
-			credits: "50,000",
-			status: "Completed",
-			actions: "View Receipt",
-		},
-		{
-			date: "6/23/2025",
-			amount: "Rp 100.000",
-			credits: "100,000",
-			status: "Pending",
-			actions: "Cancel",
-		},
-	];
+				setIsAuthenticated(true);
+			} catch (error) {
+				console.error("Error checking authentication:", error);
+				navigate("/login");
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		checkAuth();
+	}, [navigate]);
 
 	const handleTopUp = (_amount: number) => {
 		// Future implementation for top-up functionality
 	};
+
+	if (loading) {
+		return (
+			<div className="ml-[300px] p-6">
+				<div className="flex items-center justify-center h-64">
+					<div className="animate-pulse text-lg">Loading...</div>
+				</div>
+			</div>
+		);
+	}
+
+	if (!isAuthenticated) {
+		return (
+			<div className="ml-[300px] p-6">
+				<div className="flex items-center justify-center h-64">
+					<div className="text-center">
+						<h2 className="text-xl font-bold mb-4">Authentication Required</h2>
+						<p className="text-gray-600 mb-4">
+							Please log in to access your billing information.
+						</p>
+						<button
+							type="button"
+							onClick={() => navigate("/login")}
+							className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+						>
+							Go to Login
+						</button>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<>
@@ -84,9 +102,9 @@ function Billing() {
 					onTopUp={handleTopUp}
 				/>
 
-				<BalanceCard currentBalance={currentBalance} />
+				<BalanceCard />
 
-				<TransactionTable transactions={transactions} payments={payments} />
+				<TransactionTable />
 			</div>
 		</>
 	);
