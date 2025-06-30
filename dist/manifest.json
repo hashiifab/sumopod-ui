@@ -25,9 +25,5 @@
 	"background_color": "#ffffff",
 	"orientation": "portrait-primary",
 	"scope": "/",
-	"categories": [
-		"productivity",
-		"business",
-		"developer"
-	]
+	"categories": ["productivity", "business", "developer"]
 }

@@ -1,8 +1,57 @@
 import { useState } from "react";
-import ReactModal from "react-modal";
+import BalanceCard from "../components/BalanceCard";
+import TopUpModal from "../components/TopUpModal";
+import TransactionTable from "../components/TransactionTable";
 
 function Billing() {
 	const [modalOpen, setModalOpen] = useState(false);
+
+	// Mock data for current balance (will be dynamic in future integration)
+	const currentBalance = "Rp 190.000";
+
+	// Mock data for transactions (will be dynamic in future integration)
+	const transactions = [
+		{
+			date: "6/24/2025",
+			description: "Credit purchase: 50000 credits",
+			type: "purchase",
+			amount: "+Rp 50.000 credits",
+		},
+		{
+			date: "6/24/2025",
+			description: "Credit purchase: 50000 credits",
+			type: "purchase",
+			amount: "+Rp 50.000 credits",
+		},
+		{
+			date: "6/24/2025",
+			description: "Credit purchase: 50000 credits",
+			type: "purchase",
+			amount: "+Rp 30.000 credits",
+		},
+	];
+
+	// Mock data for payments (will be dynamic in future integration)
+	const payments = [
+		{
+			date: "6/24/2025",
+			amount: "Rp 50.000",
+			credits: "50,000",
+			status: "Completed",
+			actions: "View Receipt",
+		},
+		{
+			date: "6/23/2025",
+			amount: "Rp 100.000",
+			credits: "100,000",
+			status: "Pending",
+			actions: "Cancel",
+		},
+	];
+
+	const handleTopUp = (_amount: number) => {
+		// Future implementation for top-up functionality
+	};
 
 	return (
 		<>
@@ -29,103 +78,15 @@ function Billing() {
 					</div>
 				</div>
 
-				<ReactModal
+				<TopUpModal
 					isOpen={modalOpen}
-					onRequestClose={() => setModalOpen(false)}
-					contentLabel="Add Credit Modal"
-					className="bg-white rounded shadow-lg"
-					overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-				>
-					<div className="border-b border-black px-6 pt-4 flex justify-between">
-						<h2 className="text-xl font-bold mb-4">Top Up Balance</h2>
-						<button
-							type="button"
-							onClick={() => setModalOpen(false)}
-							className="cursor-pointer bg-transparent border-none text-xl font-bold hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded p-1"
-							aria-label="Close modal"
-						>
-							×
-						</button>
-					</div>
-					<div className="px-6 py-4 flex flex-col gap-4">
-						<div className="flex flex-col gap-2">
-							<label htmlFor="amount">amount(Rp)</label>
-							<input
-								className="border border-gray-300 w-[300px] rounded-lg p-2"
-								type="number"
-							/>
-						</div>
-						<div className="flex flex-row gap-4 mt-4 justify-between">
-							<div className="bg-white p-2 rounded-lg border border-gray-300">
-								50.000
-							</div>
-							<div className="bg-white p-2 rounded-lg border border-gray-300">
-								100.000
-							</div>
-							<div className="bg-white p-2 rounded-lg border border-gray-300">
-								200.000
-							</div>
-						</div>
-						<div className="mt-4">
-							<button
-								type="button"
-								className="bg-blue-500 text-white px-4 py-2 rounded-lg text-center w-full"
-							>
-								top up
-							</button>
-						</div>
-					</div>
-				</ReactModal>
+					onClose={() => setModalOpen(false)}
+					onTopUp={handleTopUp}
+				/>
 
-				<div className="bg-white p-6 rounded-lg shadow-lg mt-6">
-					<div className="flex gap-4 items-center">
-						<div className="w-10 h-10 rounded-full bg-blue-500"></div>
-						<div>
-							<h2 className="text-sm font-bold">Current Credits</h2>
-							<p className="text-2xl font-bold">Rp 20.000</p>
-						</div>
-					</div>
-				</div>
+				<BalanceCard currentBalance={currentBalance} />
 
-				<div>
-					<div className="flex gap-4">
-						<h2 className="text-2xl font-bold mt-6">Transaction </h2>
-						<h2 className="text-2xl font-bold mt-6">Payment </h2>
-					</div>
-					<div className="mt-5">
-						<table className="min-w-full border border-gray-300">
-							<thead>
-								<tr>
-									<th className="px-4 py-2 border-b text-center">date</th>
-									<th className="px-4 py-2 border-b text-center">
-										descriotion
-									</th>
-									<th className="px-4 py-2 border-b text-center">type</th>
-									<th className="px-4 py-2 border-b text-center">amount</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<tr>
-									<td className="px-4 py-2 border-b text-center">6/24/2025</td>
-									<td className="px-4 py-2 border-b text-center">
-										Credit purchase: 50000 credits
-									</td>
-									<td className="px-4 py-2 border-b text-center">purchase</td>
-									<td className="px-4 py-2 border-b">+Rp 50.000 credits</td>
-								</tr>
-								<tr>
-									<td className="px-4 py-2 border-b text-center">6/24/2025</td>
-									<td className="px-4 py-2 border-b text-center">
-										Credit purchase: 50000 credits
-									</td>
-									<td className="px-4 py-2 border-b text-center">purchase</td>
-									<td className="px-4 py-2 border-b">+Rp 50.000 credits</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+				<TransactionTable transactions={transactions} payments={payments} />
 			</div>
 		</>
 	);

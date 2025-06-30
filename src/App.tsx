@@ -1,7 +1,6 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { useEffect } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./index.css";
-import { supabase } from "./supabase";
 
 import Affiliate from "./pages/Affiliate";
 import Ai from "./pages/Ai";
@@ -14,6 +13,7 @@ import Services from "./pages/Service";
 import Setting from "./pages/Setting";
 import Support from "./pages/Support";
 import Templates from "./pages/Templates";
+import { supabase } from "./supabase";
 
 function App() {
 	useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
 
 			if (data.session && window.location.hash) {
 				// Clean up the URL by removing the hash
-				window.history.replaceState(null, '', window.location.pathname);
+				window.history.replaceState(null, "", window.location.pathname);
 			}
 		};
 
