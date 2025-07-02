@@ -12,7 +12,7 @@ interface TopUpModalProps {
   onTopUp?: (amount: number) => void;
 }
 
-function TopUpModal({ isOpen, onClose, onTopUp }: TopUpModalProps) {
+function TopUpModal({ isOpen, onClose, }: TopUpModalProps) {
   const [amount, setAmount] = useState<string>("");
 
   const handleQuickSelect = (selectedAmount: number) => {
