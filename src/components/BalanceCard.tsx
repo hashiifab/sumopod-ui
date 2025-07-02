@@ -7,7 +7,40 @@ function BalanceCard() {
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		const fetchBalance = async () => {
+		let mounted = true;
+
+		const checkAuthAndFetch = async () => {
+			// Wait a bit for auth to be ready
+			await new Promise(resolve => setTimeout(resolve, 100));
+
+			const { data: { session } } = await supabase.auth.getSession();
+			if (session?.user?.id && mounted) {
+				fetchBalance();
+			} else {
+				// Listen for auth changes
+				const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+					if (event === 'SIGNED_IN' && session?.user?.id && mounted) {
+						fetchBalance();
+					}
+				});
+
+				// Cleanup subscription
+				return () => {
+					subscription.unsubscribe();
+					mounted = false;
+				};
+			}
+		};
+
+		checkAuthAndFetch();
+
+		return () => {
+			mounted = false;
+		};
+	}, []);
+
+	const fetchBalance = async () => {
+		try {
 			setLoading(true);
 			setError(null);
 
@@ -18,36 +51,60 @@ function BalanceCard() {
 
 			if (!userId) {
 				setError("Not authenticated");
-				setLoading(false);
 				return;
 			}
 
+			// Try to get existing balance first
 			const { data, error } = await supabase
 				.from("balances")
-				.select("current_balance")
+				.select("user_balance")
 				.eq("user_id", userId)
 				.single();
 
-			if (error) {
-				if (error.code === "PGRST116") {
-					// ga ada balance = tambahkan 0
-					await supabase.from("balances").insert({
+			if (error && error.code === "PGRST116") {
+				// No balance record exists, try to create one
+				const { data: newBalance, error: insertError } = await supabase
+					.from("balances")
+					.insert({
 						user_id: userId,
-						current_balance: 0,
-					});
-					setBalance(0);
+						user_balance: 0,
+					})
+					.select("user_balance")
+					.single();
+
+				if (insertError) {
+					// Handle conflict error (user already exists)
+					if (insertError.code === '23505') {
+						// Unique constraint violation, try to fetch again
+						const { data: existingBalance, error: fetchError } = await supabase
+							.from("balances")
+							.select("user_balance")
+							.eq("user_id", userId)
+							.single();
+
+						if (fetchError) {
+							setError("Failed to fetch balance");
+						} else {
+							setBalance(existingBalance?.user_balance || 0);
+						}
+					} else {
+						setError("Failed to create balance");
+					}
 				} else {
-					setError("Gagal ambil saldo");
+					setBalance(newBalance?.user_balance || 0);
 				}
+			} else if (error) {
+				setError("Failed to fetch balance");
 			} else {
-				setBalance(data.current_balance);
+				setBalance(data?.user_balance || 0);
 			}
-
+		} catch (err) {
+			console.error("Unexpected error:", err);
+			setError("An unexpected error occurred");
+		} finally {
 			setLoading(false);
-		};
-
-		fetchBalance();
-	}, []);
+		}
+	};
 
 	const formatCurrency = (amount: number): string => {
 		return new Intl.NumberFormat("id-ID", {
