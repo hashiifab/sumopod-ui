@@ -24,7 +24,7 @@ function DashboardHeader({ onToggleSidebar }: DashboardHeaderProps) {
   };
 
   return (
-    <header className="flex justify-between items-center px-4 sm:px-6 h-16 bg-white border-b border-gray-200 sticky top-0 z-20">
+    <header className="flex justify-between md:justify-end items-center px-4 sm:px-6 h-16 bg-white border-b border-gray-200 sticky top-0 z-20">
       <button
         type="button"
         className="md:hidden bg-white border p-2 rounded"
@@ -38,7 +38,7 @@ function DashboardHeader({ onToggleSidebar }: DashboardHeaderProps) {
         </div>
       </button>
 
-      <div className="hidden md:block text-xl font-bold">Sumopod</div>
+      
 
       <div className="flex items-center gap-3 text-sm">
         <div className="w-8 h-8 rounded-full bg-blue-500" />

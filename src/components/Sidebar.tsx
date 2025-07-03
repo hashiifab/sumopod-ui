@@ -13,12 +13,12 @@ function Sidebar({ open, setOpen }: SidebarProps){
           open ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
-        <div className="flex items-center justify-between px-6 pt-4 pb-2 h-16 border-b border-gray-200 text-xl font-bold md:hidden">
+        <div className="flex items-center justify-between px-6 pt-4 pb-2 h-16 border-b border-gray-200 text-xl font-bold">
           Sumopod
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="text-xl font-bold"
+            className="text-xl font-bold md:hidden"
           >
             ×
           </button>
