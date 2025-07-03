@@ -1,10 +1,10 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import DashboardHeader from "../components/DashboardHeader";
 import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen">
