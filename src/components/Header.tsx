@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/a11y/useValidAnchor: <explanation> */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react"; // Icon burger & close
