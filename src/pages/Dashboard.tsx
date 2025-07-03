@@ -3,16 +3,6 @@ import { Outlet } from "react-router-dom";
 import DashboardHeader from "../components/DashboardHeader";
 import Sidebar from "../components/Sidebar";
 
-// Add prop interfaces
-interface SidebarProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface DashboardHeaderProps {
-  onToggleSidebar: () => void;
-}
-
 function Dashboard() {
   const [open, setOpen] = useState(false);
 
