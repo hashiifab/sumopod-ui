@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/nursery/useUniqueElementIds: <explanation> */
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
@@ -12,16 +13,25 @@ function Home() {
           Seconds!
         </h1>
         <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <button type="button" className="bg-blue-600 text-white px-6 py-2 rounded-lg">
+          <button
+            type="button"
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg"
+          >
             Get Started
           </button>
-          <button type="button" className="bg-gray-200 text-black px-6 py-2 rounded-lg">
+          <button
+            type="button"
+            className="bg-gray-200 text-black px-6 py-2 rounded-lg"
+          >
             See App Template
           </button>
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center min-h-screen bg-slate-100 px-4 gap-6 text-center">
+      <section
+        id="pricing"
+        className="flex flex-col justify-center items-center min-h-screen bg-slate-100 px-4 gap-6 text-center"
+      >
         <div className="max-w-2xl">
           <h1 className="text-3xl md:text-4xl font-bold">
             Simple, Transparent Pricing
@@ -39,17 +49,26 @@ function Home() {
             management
           </p>
           <div className="flex flex-col gap-4 w-full">
-            <button type="button" className="bg-blue-600 text-white w-full px-6 py-2 rounded-sm">
+            <button
+              type="button"
+              className="bg-blue-600 text-white w-full px-6 py-2 rounded-sm"
+            >
               Get Started
             </button>
-            <button type="button" className="bg-blue-600 text-white w-full px-6 py-2 rounded-sm">
+            <button
+              type="button"
+              className="bg-blue-600 text-white w-full px-6 py-2 rounded-sm"
+            >
               See App Template
             </button>
           </div>
         </div>
       </section>
 
-      <section className="flex flex-col justify-center items-center min-h-screen bg-white gap-6 px-4">
+      <section
+        id="features"
+        className="flex flex-col justify-center items-center min-h-screen bg-white gap-6 px-4"
+      >
         <div className="text-center max-w-2xl">
           <h1 className="text-3xl md:text-4xl font-bold">
             Everything you need in one platform
@@ -108,10 +127,16 @@ function Home() {
             </div>
 
             <div className="flex gap-4 flex-row justify-center items-center">
-              <button type="button" className="bg-transparent border-2 border-white text-white px-6 py-2 rounded-lg whitespace-nowrap">
+              <button
+                type="button"
+                className="bg-transparent border-2 border-white text-white px-6 py-2 rounded-lg whitespace-nowrap"
+              >
                 See App Template
               </button>
-              <button type="button" className="bg-white text-black px-7 py-3 rounded-lg whitespace-nowrap">
+              <button
+                type="button"
+                className="bg-white text-black px-7 py-3 rounded-lg whitespace-nowrap"
+              >
                 Get Started
               </button>
             </div>

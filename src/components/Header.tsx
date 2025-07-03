@@ -18,10 +18,10 @@ function Header() {
             <a className="hover:text-blue-500" href="/templates">
               Template
             </a>
-            <a className="hover:text-blue-500" href="/pricing">
+            <a className="hover:text-blue-500" href="#pricing">
               Pricing
             </a>
-            <a className="hover:text-blue-500" href="/features">
+            <a className="hover:text-blue-500" href="#features">
               Features
             </a>
           </nav>
@@ -73,14 +73,14 @@ function Header() {
           </a>
           <a
             className="hover:text-blue-500"
-            href="/pricing"
+            href="#pricing"
             onClick={() => setIsOpen(false)}
           >
             Pricing
           </a>
           <a
             className="hover:text-blue-500"
-            href="/features"
+            href="#features"
             onClick={() => setIsOpen(false)}
           >
             Features

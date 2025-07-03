@@ -1,22 +1,15 @@
 function Support() {
-	return (
-		<>
-			<div className="ml-[300px] p-6">
-				<div className="flex items-center justify-between">
-					<div>
-						<h1 className="text-2xl font-bold">Support</h1>
-						<p>Get help and support for your SumoPod services</p>
-					</div>
-				</div>
-
-				<div>
-					<div className="bg-white p-6 rounded-lg shadow-lg mt-6 h-screen flex justify-center items-center">
-						<h1 className="text-6xl font-bold text-center">Halaman support</h1>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+  return (
+    <div className="p-4 sm:p-6">
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold">Support</h1>
+        <p className="text-sm text-gray-600">Get help & support</p>
+      </div>
+      <div className="bg-white p-6 rounded-lg shadow flex justify-center items-center min-h-[300px] sm:min-h-[400px]">
+        <h1 className="text-4xl sm:text-6xl font-bold text-center">Halaman Support</h1>
+      </div>
+    </div>
+  );
 }
 
 export default Support;
