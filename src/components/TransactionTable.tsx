@@ -121,15 +121,15 @@ function TransactionTable() {
   const renderTransactionTable = () => {
     if (loading) {
       return (
-        <div className="w-full border border-gray-300 p-8 text-center">
-          <div className="animate-pulse">Loading...</div>
+        <div className="w-full border border-gray-300 p-6 text-center">
+          <div className="animate-pulse text-sm sm:text-base">Loading...</div>
         </div>
       );
     }
 
     if (error) {
       return (
-        <div className="w-full border border-gray-300 p-8 text-center text-red-600">
+        <div className="w-full border border-gray-300 p-6 text-center text-red-600 text-sm sm:text-base">
           {error}
         </div>
       );
@@ -137,31 +137,37 @@ function TransactionTable() {
 
     if (transactions.length === 0) {
       return (
-        <div className="w-full border border-gray-300 p-8 text-center text-gray-500">
+        <div className="w-full border border-gray-300 p-6 text-center text-gray-500 text-sm sm:text-base">
           No transactions found
         </div>
       );
     }
 
     return (
-      <div className="overflow-x-auto">
-        <table className="w-full border border-gray-300">
+      <div className="overflow-x-auto max-w-full">
+        <table className="w-full max-w-full border border-gray-300 table-auto">
           <thead>
             <tr>
-              <th className="px-4 py-2 border-b text-center text-sm sm:text-base">Date</th>
-              <th className="px-4 py-2 border-b text-center text-sm sm:text-base">Type</th>
-              <th className="px-4 py-2 border-b text-center text-sm sm:text-base">Amount</th>
+              <th className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm font-medium whitespace-nowrap">
+                Date
+              </th>
+              <th className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm font-medium whitespace-nowrap">
+                Type
+              </th>
+              <th className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm font-medium whitespace-nowrap">
+                Amount
+              </th>
             </tr>
           </thead>
           <tbody>
             {transactions.map((transaction) => (
               <tr key={transaction.id}>
-                <td className="px-4 py-2 border-b text-center text-sm sm:text-base">
+                <td className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
                   {formatDate(transaction.date)}
                 </td>
-                <td className="px-4 py-2 border-b text-center text-sm sm:text-base">
+                <td className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm">
                   <span
-                    className={`px-2 py-1 rounded text-sm ${
+                    className={`inline-block px-2 py-1 rounded text-xs sm:text-sm whitespace-nowrap ${
                       transaction.type === "purchase"
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
@@ -170,7 +176,7 @@ function TransactionTable() {
                     {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
                   </span>
                 </td>
-                <td className="px-4 py-2 border-b text-center text-sm sm:text-base">
+                <td className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
                   {formatCurrency(transaction.amount)}
                 </td>
               </tr>
@@ -184,15 +190,15 @@ function TransactionTable() {
   const renderPaymentTable = () => {
     if (loading) {
       return (
-        <div className="w-full border border-gray-300 p-8 text-center">
-          <div className="animate-pulse">Loading...</div>
+        <div className="w-full border border-gray-300 p-6 text-center">
+          <div className="animate-pulse text-sm sm:text-base">Loading...</div>
         </div>
       );
     }
 
     if (error) {
       return (
-        <div className="w-full border border-gray-300 p-8 text-center text-red-600">
+        <div className="w-full border border-gray-300 p-6 text-center text-red-600 text-sm sm:text-base">
           {error}
         </div>
       );
@@ -200,35 +206,43 @@ function TransactionTable() {
 
     if (payments.length === 0) {
       return (
-        <div className="w-full border border-gray-300 p-8 text-center text-gray-500">
+        <div className="w-full border border-gray-300 p-6 text-center text-gray-500 text-sm sm:text-base">
           No payments found
         </div>
       );
     }
 
     return (
-      <div className="overflow-x-auto">
-        <table className="w-full border border-gray-300">
+      <div className="overflow-x-auto max-w-full">
+        <table className="w-full max-w-full border border-gray-300 table-auto">
           <thead>
             <tr>
-              <th className="px-4 py-2 border-b text-center text-sm sm:text-base">Date</th>
-              <th className="px-4 py-2 border-b text-center text-sm sm:text-base">Amount</th>
-              <th className="px-4 py-2 border-b text-center text-sm sm:text-base">Status</th>
-              <th className="px-4 py-2 border-b text-center text-sm sm:text-base">Actions</th>
+              <th className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm font-medium whitespace-nowrap">
+                Date
+              </th>
+              <th className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm font-medium whitespace-nowrap">
+                Amount
+              </th>
+              <th className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm font-medium whitespace-nowrap">
+                Status
+              </th>
+              <th className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm font-medium whitespace-nowrap">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {payments.map((payment) => (
               <tr key={payment.id}>
-                <td className="px-4 py-2 border-b text-center text-sm sm:text-base">
+                <td className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
                   {formatDate(payment.created_at)}
                 </td>
-                <td className="px-4 py-2 border-b text-center text-sm sm:text-base">
+                <td className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
                   {formatCurrency(payment.amount)}
                 </td>
-                <td className="px-4 py-2 border-b text-center text-sm sm:text-base">
+                <td className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm">
                   <span
-                    className={`px-2 py-1 rounded text-sm ${
+                    className={`inline-block px-2 py-1 rounded text-xs sm:text-sm whitespace-nowrap ${
                       payment.status === "paid"
                         ? "bg-green-100 text-green-800"
                         : payment.status === "pending"
@@ -241,9 +255,9 @@ function TransactionTable() {
                     {payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
                   </span>
                 </td>
-                <td className="px-4 py-2 border-b text-center text-sm sm:text-base">
+                <td className="px-2 py-1 sm:px-3 sm:py-2 border-b text-center text-xs sm:text-sm">
                   {payment.status === "paid" ? (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs sm:text-sm font-medium bg-green-100 text-green-800 whitespace-nowrap">
                       Done
                     </span>
                   ) : payment.status === "pending" && payment.invoice_url ? (
@@ -251,12 +265,12 @@ function TransactionTable() {
                       href={payment.invoice_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+                      className="inline-flex items-center px-2 py-1 rounded-full text-xs sm:text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 transition-colors whitespace-nowrap"
                     >
                       Pay
                     </a>
                   ) : (
-                    <span className="text-gray-400 text-sm">-</span>
+                    <span className="text-gray-400 text-xs sm:text-sm whitespace-nowrap">-</span>
                   )}
                 </td>
               </tr>
@@ -272,7 +286,7 @@ function TransactionTable() {
       <div className="flex gap-4">
         <button
           type="button"
-          className={`text-lg sm:text-2xl font-bold mt-6 px-4 py-2 rounded-lg transition-colors ${
+          className={`text-base sm:text-lg font-bold mt-6 px-4 py-2 rounded-lg transition-colors ${
             activeView === "transaction"
               ? "bg-blue-500 text-white"
               : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -283,7 +297,7 @@ function TransactionTable() {
         </button>
         <button
           type="button"
-          className={`text-lg sm:text-2xl font-bold mt-6 px-4 py-2 rounded-lg transition-colors ${
+          className={`text-base sm:text-lg font-bold mt-6 px-4 py-2 rounded-lg transition-colors ${
             activeView === "payment"
               ? "bg-blue-500 text-white"
               : "bg-gray-200 text-gray-700 hover:bg-gray-300"
