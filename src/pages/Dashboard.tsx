@@ -8,9 +8,7 @@ function Dashboard() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
       <Sidebar open={open} setOpen={setOpen} />
-      {/* Main Content */}
       <div className="flex-1 flex flex-col">
         <DashboardHeader onToggleSidebar={() => setOpen(!open)} />
         <main className="flex-1 p-4 sm:p-6 bg-gray-50">
