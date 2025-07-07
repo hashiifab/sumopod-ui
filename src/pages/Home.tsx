@@ -67,20 +67,20 @@ function Home() {
 
       <section
         id="features"
-        className="flex flex-col justify-center items-center min-h-screen bg-white gap-6 px-4"
+        className="flex flex-col justify-center items-center min-h-screen bg-white gap-6 px-4 py-10"
       >
         <div className="text-center max-w-2xl">
-          <h1 className="text-3xl md:text-4xl font-bold">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Everything you need in one platform
           </h1>
-          <p className="text-lg md:text-xl font-medium mt-2">
+          <p className="text-base sm:text-lg md:text-xl font-medium mt-2">
             SumoPod offers comprehensive solutions for container and application
             management
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6">
-          <div className="bg-white border border-black w-full max-w-sm rounded-lg hover:shadow-lg p-4">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-6 w-full">
+          <div className="bg-white border border-black w-full sm:max-w-sm rounded-lg hover:shadow-lg p-4">
             <div className="flex flex-col gap-4">
               <div className="bg-blue-600 h-10 w-10 rounded-full"></div>
               <h2 className="text-xl font-bold">Container Marketplace</h2>
@@ -90,23 +90,25 @@ function Home() {
               </p>
             </div>
           </div>
-          <div className="bg-white border border-black w-full max-w-sm rounded-lg hover:shadow-lg p-4">
+
+          <div className="bg-white border border-black w-full sm:max-w-sm rounded-lg hover:shadow-lg p-4">
             <div className="flex flex-col gap-4">
               <div className="bg-blue-600 h-10 w-10 rounded-full"></div>
-              <h2 className="text-xl font-bold">Container Marketplace</h2>
+              <h2 className="text-xl font-bold">Deployment Automation</h2>
               <p className="text-base font-medium">
-                Explore and purchase from our extensive container library, all
-                verified and ready for instant deployment.
+                Automate your deployment process with ease using our intuitive
+                orchestration tools.
               </p>
             </div>
           </div>
-          <div className="bg-white border border-black w-full max-w-sm rounded-lg hover:shadow-lg p-4">
+
+          <div className="bg-white border border-black w-full sm:max-w-sm rounded-lg hover:shadow-lg p-4">
             <div className="flex flex-col gap-4">
               <div className="bg-blue-600 h-10 w-10 rounded-full"></div>
-              <h2 className="text-xl font-bold">Container Marketplace</h2>
+              <h2 className="text-xl font-bold">Real-Time Monitoring</h2>
               <p className="text-base font-medium">
-                Explore and purchase from our extensive container library, all
-                verified and ready for instant deployment.
+                Gain full visibility into container performance with live
+                metrics and alerts.
               </p>
             </div>
           </div>
@@ -114,28 +116,28 @@ function Home() {
       </section>
 
       <div className="flex justify-center items-center mb-20 px-4">
-        <div className="bg-blue-600 w-full max-w-6xl rounded-xl py-20 px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-center md:text-left">
-              <h1 className="text-xl md:text-2xl font-bold text-white">
+        <div className="bg-blue-600 w-full max-w-6xl rounded-xl py-10 px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
                 Ready to transform your container management?
               </h1>
-              <p className="text-base md:text-xl font-medium text-white mt-2">
+              <p className="text-sm sm:text-base md:text-xl font-medium text-white mt-2">
                 Join thousands of businesses using SumoPod to simplify their
                 container and application infrastructure.
               </p>
             </div>
 
-            <div className="flex gap-4 flex-row justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center items-center">
               <button
                 type="button"
-                className="bg-transparent border-2 border-white text-white px-6 py-2 rounded-lg whitespace-nowrap"
+                className="bg-transparent border-2 border-white text-white px-4 sm:px-6 py-2 rounded-lg whitespace-nowrap w-full sm:w-auto"
               >
                 See App Template
               </button>
               <button
                 type="button"
-                className="bg-white text-black px-7 py-3 rounded-lg whitespace-nowrap"
+                className="bg-white text-black px-4 sm:px-7 py-2 sm:py-3 rounded-lg whitespace-nowrap w-full sm:w-auto"
               >
                 Get Started
               </button>

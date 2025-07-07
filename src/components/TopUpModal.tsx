@@ -5,14 +5,13 @@ import { supabase } from "../supabase";
 import { useState } from "react";
 import ReactModal from "react-modal";
 
-
 interface TopUpModalProps {
   isOpen: boolean;
   onClose: () => void;
   onTopUp?: (amount: number) => void;
 }
 
-function TopUpModal({ isOpen, onClose, }: TopUpModalProps) {
+function TopUpModal({ isOpen, onClose }: TopUpModalProps) {
   const [amount, setAmount] = useState<string>("");
 
   const handleQuickSelect = (selectedAmount: number) => {
@@ -52,7 +51,7 @@ function TopUpModal({ isOpen, onClose, }: TopUpModalProps) {
       if (!response.ok) throw new Error("Failed to create invoice");
 
       const result = await response.json();
-      window.open(result.invoice_url, '_blank');
+      window.open(result.invoice_url, "_blank");
       handleClose();
     } catch (error) {
       console.error("TopUp error:", error);
