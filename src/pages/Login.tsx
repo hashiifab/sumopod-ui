@@ -1,45 +1,92 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import { supabase } from "../supabase";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Login() {
-  const loginGoogle = async () => {
-    const isProduction =
-      import.meta.env.PROD ||
-      window.location.hostname === "cloone-sumopod.netlify.app";
-    const baseUrl = isProduction
-      ? "https://cloone-sumopod.netlify.app"
-      : window.location.origin;
+  const [isSignup, setIsSignup] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${baseUrl}/dashboard/services`,
-      },
+  const handleSubmit = async () => {
+    const url = isSignup
+      ? 'http://localhost:3000/api/auth/sign-up/email'
+      : 'http://localhost:3000/api/auth/sign-in/email';
+
+    const payload = isSignup ? { name, email, password } : { email, password };
+
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
     });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem('auth_token', data.token);
+      localStorage.setItem('user_email', data.user.email);
+      navigate('/dashboard/services');
+    } else {
+      alert(data.message || 'Login/Signup failed');
+    }
   };
 
   return (
     <>
       <Header />
-      <div className="flex justify-center items-center min-h-screen px-4 bg-gray-50">
-        <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-8 md:p-10 flex flex-col gap-6 border border-gray-200">
-          <div className="text-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-              Welcome back
-            </h1>
-            <p className="text-sm md:text-base text-gray-600 mt-1">
-              Sign in to your account to continue
-            </p>
-          </div>
+      <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
+        <div className="bg-white w-full max-w-md rounded-xl shadow p-8 flex flex-col gap-5 border">
+          <h2 className="text-2xl font-bold text-center">
+            {isSignup ? 'Create an Account' : 'Sign In'}
+          </h2>
+
+          {isSignup && (
+            <input
+              type="text"
+              placeholder="Name"
+              className="border rounded px-4 py-2"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          )}
+
+          <input
+            type="email"
+            placeholder="Email"
+            className="border rounded px-4 py-2"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="border rounded px-4 py-2"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
           <button
             type="button"
-            onClick={loginGoogle}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 md:py-3 md:px-6 rounded-lg transition-all duration-200"
+            onClick={handleSubmit}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition"
           >
-            Sign in with Google
+            {isSignup ? 'Sign Up' : 'Sign In'}
           </button>
+
+          <p className="text-sm text-center">
+            {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
+            <button
+              type="button"
+              onClick={() => setIsSignup(!isSignup)}
+              className="text-blue-600 underline"
+            >
+              {isSignup ? 'Sign In' : 'Sign Up'}
+            </button>
+          </p>
         </div>
       </div>
       <Footer />
