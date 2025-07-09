@@ -10,20 +10,18 @@ function Billing() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('auth_token');
+    const jwtToken = localStorage.getItem('jwt_token');
     const userEmail = localStorage.getItem('user_email');
 
-    if (!token || !userEmail) {
-      // Redirect ke login kalau tidak ada token/email
+    if (!jwtToken || !userEmail) {
       navigate('/login');
-    } else {
-      setLoading(false); // Kalau valid, stop loading
+      return;
     }
+
+    setLoading(false);
   }, [navigate]);
 
-  const handleTopUp = (_amount: number) => {
-    // Top-up logic goes here
-  };
+  const handleTopUp = (_amount: number) => {};
 
   if (loading) {
     return (

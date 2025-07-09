@@ -10,28 +10,44 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    const url = isSignup
-      ? 'http://localhost:3000/api/auth/sign-up/email'
-      : 'http://localhost:3000/api/auth/sign-in/email';
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+  };
 
+  const handleSubmit = async () => {
+    const isFormValid = email && password && (isSignup ? name : true);
+    if (!isFormValid) return;
+
+    const authUrl = `http://localhost:3000/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
     const payload = isSignup ? { name, email, password } : { email, password };
 
-    const res = await fetch(url, {
+    const res = await fetch(authUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
+      credentials: 'include',
     });
 
     const data = await res.json();
+    if (!res.ok) return;
 
-    if (res.ok) {
-      localStorage.setItem('auth_token', data.token);
-      localStorage.setItem('user_email', data.user.email);
-      navigate('/dashboard/services');
-    } else {
-      alert(data.message || 'Login/Signup failed');
-    }
+    localStorage.setItem('user_email', data.user.email);
+    localStorage.setItem('user_id', data.user.id);
+
+    const jwtRes = await fetch('http://localhost:3000/api/auth/token', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${data.token}`,
+      },
+    });
+
+    const jwtData = await jwtRes.json();
+    if (!jwtRes.ok || !jwtData.token) return;
+
+    localStorage.setItem('jwt_token', jwtData.token);
+    navigate('/dashboard/services');
   };
 
   return (
@@ -81,7 +97,10 @@ function Login() {
             {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
             <button
               type="button"
-              onClick={() => setIsSignup(!isSignup)}
+              onClick={() => {
+                setIsSignup(!isSignup);
+                resetForm();
+              }}
               className="text-blue-600 underline"
             >
               {isSignup ? 'Sign In' : 'Sign Up'}

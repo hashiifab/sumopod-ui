@@ -1,9 +1,5 @@
-/** biome-ignore-all lint/nursery/useUniqueElementIds: <explanation> */
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: <explanation> */
-/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
-import { supabase } from "../supabase";
-import { useState } from "react";
-import ReactModal from "react-modal";
+import { useState } from 'react';
+import ReactModal from 'react-modal';
 
 interface TopUpModalProps {
   isOpen: boolean;
@@ -12,51 +8,52 @@ interface TopUpModalProps {
 }
 
 function TopUpModal({ isOpen, onClose }: TopUpModalProps) {
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<string>('');
 
   const handleQuickSelect = (selectedAmount: number) => {
     setAmount(selectedAmount.toString());
   };
 
   const handleClose = () => {
-    setAmount("");
+    setAmount('');
     onClose();
   };
 
   const handleTopUpSubmit = async () => {
-    // Future implementation for form submission
     if (!amount || Number(amount) <= 0) {
-      alert("Please enter a valid amount");
+      alert('Masukkan nominal yang valid.');
       return;
     }
-    try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
 
-      const response = await fetch(
-        "https://n8n-vaw3sogm.runner.web.id/webhook/create-invoice",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session?.access_token}`,
-          },
-          body: JSON.stringify({
-            amount: Number(amount),
-          }),
-        }
-      );
+    const token =
+      localStorage.getItem('jwt_token') ||
+      localStorage.getItem('authToken') ||
+      sessionStorage.getItem('jwt_token') ||
+      sessionStorage.getItem('authToken');
 
-      if (!response.ok) throw new Error("Failed to create invoice");
-
-      const result = await response.json();
-      window.open(result.invoice_url, "_blank");
-      handleClose();
-    } catch (error) {
-      console.error("TopUp error:", error);
-      alert("Failed to process top-up");
+    if (!token) {
+      alert('Silakan login terlebih dahulu.');
+      return;
     }
+
+    const res = await fetch('http://localhost:3000/create-invoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ amount: Number(amount) }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || !data.invoice_url) {
+      alert(data?.message || 'Top up gagal.');
+      return;
+    }
+
+    window.open(data.invoice_url, '_blank');
+    handleClose();
   };
 
   return (
@@ -80,35 +77,26 @@ function TopUpModal({ isOpen, onClose }: TopUpModalProps) {
       </div>
       <div className="px-6 py-4 flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <label htmlFor="amount">amount(Rp)</label>
+          <label htmlFor="amount">amount (Rp)</label>
           <input
             className="border border-gray-300 w-[300px] rounded-lg p-2"
             type="number"
-            id="amount"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Enter amount"
+            onChange={(e) => setAmount((e.target as HTMLInputElement).value)}
+            placeholder="Masukkan nominal"
           />
         </div>
         <div className="flex flex-row gap-4 mt-4 justify-between">
-          <div
-            className="bg-white p-2 rounded-lg border border-gray-300 cursor-pointer hover:bg-gray-50"
-            onClick={() => handleQuickSelect(50000)}
-          >
-            50.000
-          </div>
-          <div
-            className="bg-white p-2 rounded-lg border border-gray-300 cursor-pointer hover:bg-gray-50"
-            onClick={() => handleQuickSelect(100000)}
-          >
-            100.000
-          </div>
-          <div
-            className="bg-white p-2 rounded-lg border border-gray-300 cursor-pointer hover:bg-gray-50"
-            onClick={() => handleQuickSelect(200000)}
-          >
-            200.000
-          </div>
+          {[50000, 100000, 200000].map((val) => (
+            <button
+              type="button"
+              key={val}
+              className="bg-white p-2 rounded-lg border border-gray-300 cursor-pointer hover:bg-gray-50"
+              onClick={() => handleQuickSelect(val)}
+            >
+              {val.toLocaleString('id-ID')}
+            </button>
+          ))}
         </div>
         <div className="mt-4">
           <button
@@ -116,7 +104,7 @@ function TopUpModal({ isOpen, onClose }: TopUpModalProps) {
             className="bg-blue-500 text-white px-4 py-2 rounded-lg text-center w-full"
             onClick={handleTopUpSubmit}
           >
-            top up
+            Top Up
           </button>
         </div>
       </div>

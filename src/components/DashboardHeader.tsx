@@ -15,7 +15,7 @@ function DashboardHeader({
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('auth_token');
+    const token = localStorage.getItem('jwt_token');
     const userEmail = localStorage.getItem('user_email');
 
     if (token && userEmail) {
@@ -25,7 +25,15 @@ function DashboardHeader({
     }
   }, [navigate]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await fetch('http://localhost:3000/api/auth/sign-out', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).catch(() => {});
+
     localStorage.clear();
     navigate('/');
   };

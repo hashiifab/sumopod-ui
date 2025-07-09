@@ -1,50 +1,60 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../supabase";
+import { useEffect, useState } from 'react';
+
+const API_BASE_URL = 'http://localhost:3000';
+
+const getAuthToken = (): string | null =>
+  localStorage.getItem('jwt_token') ||
+  localStorage.getItem('authToken') ||
+  sessionStorage.getItem('jwt_token') ||
+  sessionStorage.getItem('authToken');
+
+const apiCall = (endpoint: string, options: RequestInit = {}) => {
+  const token = getAuthToken();
+  if (!token) return Promise.reject('Unauthorized');
+
+  const config: RequestInit = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+      ...options.headers,
+    },
+    ...options,
+  };
+
+  return fetch(`${API_BASE_URL}${endpoint}`, config).then((res) => {
+    if (!res.ok) throw new Error('Failed to fetch');
+    return res.json();
+  });
+};
 
 function BalanceCard() {
-	const [balance, setBalance] = useState<number | null>(null);
-	const [error, setError] = useState<string | null>(null);
+  const [balance, setBalance] = useState<number | null>(null);
 
-	useEffect(() => {
-		const fetchBalance = async () => {
-			const { data, error } = await supabase
-				.from("balances")
-				.select("user_balance")
-				.single(); 
+  useEffect(() => {
+    if (!getAuthToken()) return;
 
-			if (error) {
-				setError("Gagal ambil saldo");
-			} else {
-				setBalance(data?.user_balance ?? 0);
-			}
-		};
+    apiCall('/api/data/balance').then((res) => {
+      setBalance(res?.userBalance ?? 0);
+    });
+  }, []);
 
-		fetchBalance();
-	}, []);
+  const formatCurrency = (amount: number): string =>
+    new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+    }).format(amount);
 
-	const formatCurrency = (amount: number): string =>
-		new Intl.NumberFormat("id-ID", {
-			style: "currency",
-			currency: "IDR",
-			minimumFractionDigits: 0,
-		}).format(amount);
+  if (balance === null) return null;
 
-	if (error) {
-		return <p className="text-red-500">❌ {error}</p>;
-	}
-
-	if (balance === null) {
-		return <p>🔄 Loading saldo...</p>;
-	}
-
-	return (
-		<div className="bg-white p-6 rounded-lg shadow-lg mt-6">
-			<h2 className="text-sm font-bold mb-1">Current Credits</h2>
-			<p className="text-2xl font-bold text-blue-600">
-				{formatCurrency(balance)}
-			</p>
-		</div>
-	);
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-lg mt-6">
+      <h2 className="text-sm font-bold mb-1">Current Credits</h2>
+      <p className="text-2xl font-bold text-blue-600">
+        {formatCurrency(balance)}
+      </p>
+    </div>
+  );
 }
 
 export default BalanceCard;
