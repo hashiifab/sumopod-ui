@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-const API_BASE_URL = 'https://sumopod-backend.fly.dev';
-
 const getSessionToken = (): string | null =>
   localStorage.getItem('session_token') ||
   sessionStorage.getItem('session_token');
@@ -10,7 +8,7 @@ const apiCall = (endpoint: string, options: RequestInit = {}) => {
   const token = getSessionToken();
   if (!token) return Promise.reject('Unauthorized');
 
-  const config: RequestInit = {
+  const requestConfig: RequestInit = {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -19,7 +17,10 @@ const apiCall = (endpoint: string, options: RequestInit = {}) => {
     ...options,
   };
 
-  return fetch(`${API_BASE_URL}${endpoint}`, config).then((res) => {
+  return fetch(
+    `${import.meta.env.VITE_API_BASE_URL}${endpoint}`,
+    requestConfig
+  ).then((res) => {
     if (!res.ok) throw new Error('Failed to fetch');
     return res.json();
   });

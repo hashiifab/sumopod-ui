@@ -26,7 +26,7 @@ function DashboardHeader({
   }, [navigate]);
 
   const handleLogout = async () => {
-    await fetch('https://sumopod-backend.fly.dev/api/auth/sign-out', {
+    await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/sign-out`, {
       method: 'POST',
       credentials: 'include',
       headers: {

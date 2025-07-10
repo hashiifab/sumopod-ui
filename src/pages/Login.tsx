@@ -24,7 +24,7 @@ function Login() {
 
     setError('');
 
-    const authUrl = `https://sumopod-backend.fly.dev/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
+    const authUrl = `${import.meta.env.VITE_API_BASE_URL}/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
     const payload = isSignup ? { name, email, password } : { email, password };
 
     try {

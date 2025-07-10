@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 function BeliEmas() {
   const [harga, setHarga] = useState(0);
@@ -6,7 +6,10 @@ function BeliEmas() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    fetch("https://logam-mulia-api.vercel.app/prices/anekalogam")
+    fetch(
+      import.meta.env.VITE_GOLD_API_URL ||
+        'https://logam-mulia-api.vercel.app/prices/anekalogam'
+    )
       .then((res) => res.json())
       .then((data) => setHarga(data.data[0].buy));
   }, []);

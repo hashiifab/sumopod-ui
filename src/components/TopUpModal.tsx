@@ -34,14 +34,17 @@ function TopUpModal({ isOpen, onClose }: TopUpModalProps) {
       return;
     }
 
-    const res = await fetch('https://sumopod-backend.fly.dev/create-invoice', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ amount: Number(amount) }),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/create-invoice`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount: Number(amount) }),
+      }
+    );
 
     const data = await res.json();
 

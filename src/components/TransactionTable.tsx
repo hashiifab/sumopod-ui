@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-const API_BASE_URL = 'https://sumopod-backend.fly.dev';
-
 interface Transaction {
   id: string;
   userId?: string;
@@ -33,7 +31,7 @@ const apiCall = async (endpoint: string, options: RequestInit = {}) => {
     return null;
   }
 
-  const config: RequestInit = {
+  const requestConfig: RequestInit = {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -42,7 +40,10 @@ const apiCall = async (endpoint: string, options: RequestInit = {}) => {
     ...options,
   };
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+  const response = await fetch(
+    `${import.meta.env.VITE_API_BASE_URL}${endpoint}`,
+    requestConfig
+  );
 
   if (response.status === 401) {
     localStorage.removeItem('session_token');
