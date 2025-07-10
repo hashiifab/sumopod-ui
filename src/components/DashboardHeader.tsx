@@ -26,7 +26,7 @@ function DashboardHeader({
   }, [navigate]);
 
   const handleLogout = async () => {
-    await fetch('http://localhost:3000/api/auth/sign-out', {
+    await fetch('https://sumopod-backend.fly.dev/api/auth/sign-out', {
       method: 'POST',
       credentials: 'include',
       headers: {

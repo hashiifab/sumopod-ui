@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://sumopod-backend.fly.dev';
 
 interface Transaction {
   id: string;

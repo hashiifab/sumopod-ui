@@ -20,7 +20,7 @@ function Login() {
     const isFormValid = email && password && (isSignup ? name : true);
     if (!isFormValid) return;
 
-    const authUrl = `http://localhost:3000/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
+    const authUrl = `https://sumopod-backend.fly.dev/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
     const payload = isSignup ? { name, email, password } : { email, password };
 
     const res = await fetch(authUrl, {

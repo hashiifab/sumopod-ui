@@ -34,7 +34,7 @@ function TopUpModal({ isOpen, onClose }: TopUpModalProps) {
       return;
     }
 
-    const res = await fetch('http://localhost:3000/create-invoice', {
+    const res = await fetch('https://sumopod-backend.fly.dev/create-invoice', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
