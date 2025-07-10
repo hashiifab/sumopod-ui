@@ -8,36 +8,49 @@ function Login() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const resetForm = () => {
     setName('');
     setEmail('');
     setPassword('');
+    setError('');
   };
 
   const handleSubmit = async () => {
     const isFormValid = email && password && (isSignup ? name : true);
     if (!isFormValid) return;
 
+    setError('');
+
     const authUrl = `https://sumopod-backend.fly.dev/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
     const payload = isSignup ? { name, email, password } : { email, password };
 
-    const res = await fetch(authUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      credentials: 'include',
-    });
+    try {
+      const res = await fetch(authUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        credentials: 'include',
+      });
 
-    const data = await res.json();
-    if (!res.ok) return;
+      const data = await res.json();
 
-    localStorage.setItem('user_email', data.user.email);
-    localStorage.setItem('user_id', data.user.id);
+      if (!res.ok) {
+        // Handle error response
+        setError(data.message || 'An error occurred during authentication');
+        return;
+      }
 
-    localStorage.setItem('session_token', data.token);
-    navigate('/dashboard/services');
+      localStorage.setItem('user_email', data.user.email);
+      localStorage.setItem('user_id', data.user.id);
+
+      localStorage.setItem('session_token', data.token);
+      navigate('/dashboard/services');
+    } catch (err) {
+      setError('Network error. Please try again.');
+    }
   };
 
   return (
@@ -49,13 +62,22 @@ function Login() {
             {isSignup ? 'Create an Account' : 'Sign In'}
           </h2>
 
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              {error}
+            </div>
+          )}
+
           {isSignup && (
             <input
               type="text"
               placeholder="Name"
               className="border rounded px-4 py-2"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                if (error) setError('');
+              }}
             />
           )}
 
@@ -64,7 +86,10 @@ function Login() {
             placeholder="Email"
             className="border rounded px-4 py-2"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (error) setError('');
+            }}
           />
 
           <input
@@ -72,7 +97,10 @@ function Login() {
             placeholder="Password"
             className="border rounded px-4 py-2"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (error) setError('');
+            }}
           />
 
           <button
