@@ -26,10 +26,8 @@ function TopUpModal({ isOpen, onClose }: TopUpModalProps) {
     }
 
     const token =
-      localStorage.getItem('jwt_token') ||
-      localStorage.getItem('authToken') ||
-      sessionStorage.getItem('jwt_token') ||
-      sessionStorage.getItem('authToken');
+      localStorage.getItem('session_token') ||
+      sessionStorage.getItem('session_token');
 
     if (!token) {
       alert('Silakan login terlebih dahulu.');

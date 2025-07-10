@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 
 const API_BASE_URL = 'http://localhost:3000';
 
-const getAuthToken = (): string | null =>
-  localStorage.getItem('jwt_token') ||
-  localStorage.getItem('authToken') ||
-  sessionStorage.getItem('jwt_token') ||
-  sessionStorage.getItem('authToken');
+const getSessionToken = (): string | null =>
+  localStorage.getItem('session_token') ||
+  sessionStorage.getItem('session_token');
 
 const apiCall = (endpoint: string, options: RequestInit = {}) => {
-  const token = getAuthToken();
+  const token = getSessionToken();
   if (!token) return Promise.reject('Unauthorized');
 
   const config: RequestInit = {
@@ -31,11 +29,15 @@ function BalanceCard() {
   const [balance, setBalance] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!getAuthToken()) return;
+    if (!getSessionToken()) return;
 
-    apiCall('/api/data/balance').then((res) => {
-      setBalance(res?.userBalance ?? 0);
-    });
+    apiCall('/api/data/balance')
+      .then((res) => {
+        setBalance(res?.userBalance ?? 0);
+      })
+      .catch(() => {
+        setBalance(0);
+      });
   }, []);
 
   const formatCurrency = (amount: number): string =>

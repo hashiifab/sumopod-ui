@@ -19,17 +19,15 @@ interface Payment {
   createdAt: string;
 }
 
-const getAuthToken = (): string | null => {
+const getSessionToken = (): string | null => {
   return (
-    localStorage.getItem('jwt_token') ||
-    localStorage.getItem('authToken') ||
-    sessionStorage.getItem('jwt_token') ||
-    sessionStorage.getItem('authToken')
+    localStorage.getItem('session_token') ||
+    sessionStorage.getItem('session_token')
   );
 };
 
 const apiCall = async (endpoint: string, options: RequestInit = {}) => {
-  const token = getAuthToken();
+  const token = getSessionToken();
   if (!token) {
     window.location.href = '/login';
     return null;
@@ -47,10 +45,9 @@ const apiCall = async (endpoint: string, options: RequestInit = {}) => {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
   if (response.status === 401) {
-    // JWT expired or invalid
-    localStorage.removeItem('jwt_token');
-    sessionStorage.removeItem('jwt_token');
-    window.location.href = '/login'; // redirect user
+    localStorage.removeItem('session_token');
+    sessionStorage.removeItem('session_token');
+    window.location.href = '/login';
     return null;
   }
 
@@ -74,7 +71,7 @@ function TransactionTable() {
     let mounted = true;
 
     const fetchData = async () => {
-      const token = getAuthToken();
+      const token = getSessionToken();
       if (!token || !mounted) {
         setError(true);
         setLoading(false);

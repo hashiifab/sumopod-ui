@@ -15,7 +15,7 @@ function DashboardHeader({
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('jwt_token');
+    const token = localStorage.getItem('session_token');
     const userEmail = localStorage.getItem('user_email');
 
     if (token && userEmail) {

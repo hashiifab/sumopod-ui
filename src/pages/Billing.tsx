@@ -10,10 +10,10 @@ function Billing() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const jwtToken = localStorage.getItem('jwt_token');
+    const sessionToken = localStorage.getItem('session_token');
     const userEmail = localStorage.getItem('user_email');
 
-    if (!jwtToken || !userEmail) {
+    if (!sessionToken || !userEmail) {
       navigate('/login');
       return;
     }

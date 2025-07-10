@@ -36,17 +36,7 @@ function Login() {
     localStorage.setItem('user_email', data.user.email);
     localStorage.setItem('user_id', data.user.id);
 
-    const jwtRes = await fetch('http://localhost:3000/api/auth/token', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${data.token}`,
-      },
-    });
-
-    const jwtData = await jwtRes.json();
-    if (!jwtRes.ok || !jwtData.token) return;
-
-    localStorage.setItem('jwt_token', jwtData.token);
+    localStorage.setItem('session_token', data.token);
     navigate('/dashboard/services');
   };
 
