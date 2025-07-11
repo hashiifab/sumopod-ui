@@ -24,7 +24,9 @@ function Login() {
 
     setError('');
 
-    const authUrl = `${import.meta.env.VITE_API_BASE_URL}/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
+    // Hardcode backend URL to fix undefined issue
+    const apiBaseUrl = 'https://wcwtnxxyerii.ap-southeast-1.clawcloudrun.com';
+    const authUrl = `${apiBaseUrl}/api/auth/${isSignup ? 'sign-up' : 'sign-in'}/email`;
     const payload = isSignup ? { name, email, password } : { email, password };
 
     try {
